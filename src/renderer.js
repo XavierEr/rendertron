@@ -246,7 +246,7 @@ class Renderer {
         await Runtime.evaluate({expression: `(${stripPage.toString()})()`});
         await Runtime.evaluate({expression: `(${injectBaseHref.toString()})('${url}')`});
 
-        let result = await Runtime.evaluate({expression: 'document.firstElementChild.outerHTML'});
+        let result = await Runtime.evaluate({expression: '(document.firstElementChild || document.activeElement.parentElement).outerHTML'});
         await this.closeConnection(client.target.id, config.port);
         resolve({
           status: renderResult.status,
